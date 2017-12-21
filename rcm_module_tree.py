@@ -204,7 +204,7 @@ def compute_rcm_and_module_tree(blast_path,tree_path,tree_diagram_path, protLenD
 	currentGi=0
 	rcm=""
 	#these varaiables will contain the output temporarily for speeding up the runtime
-	writeDia=""
+	#writeDia=""
 	writeTre=""
 	hspsCount=0
 	for i, line in enumerate(lines):
@@ -229,8 +229,8 @@ def compute_rcm_and_module_tree(blast_path,tree_path,tree_diagram_path, protLenD
 							for entry in row:
 								outstring+=str(entry)+","
 							outstring+="\n"
-						with open("rcms.txt","a") as f:
-							f.write(outstring+"\n\n\n")
+						# with open("rcms.txt","a") as f:
+						# 	f.write(outstring+"\n\n\n")
 
 
 					if(rcm!=""):
@@ -239,21 +239,23 @@ def compute_rcm_and_module_tree(blast_path,tree_path,tree_diagram_path, protLenD
 						
 
 						tree_root = split_rcm(rcm)
-						if len(writeDia)>300:
+						#if len(writeDia)>300:
+						if len(writeTre)>30000:
 							#print len(writeDia)
-							tree_diagram_file_handle.write(writeDia)
+							#tree_diagram_file_handle.write(writeDia)
 							tree_diagram_file_handle.flush()
 							tree_file_handle.write(writeTre)
 							tree_file_handle.flush()
 							writeTre=""
-							writeDia=""
-						writeDia=writeDia+('%d (%d hsps)\n' % (cnt, hspsCount))
-						writeDia=writeDia+('%s\n\n' % tree_root)
+							#writeDia=""
+						#writeDia=writeDia+('%d (%d hsps)\n' % (cnt, hspsCount))
+						#writeDia=writeDia+('%s\n\n' % tree_root)
 						hspsCount=0
 						#print len(writeDia)
+
+
 						writeTre=writeTre+adda_tree_string(currentGi, tree_root)
-						#tree_diagram_file_handle.write('%s\n\n' % tree_root)
-						#print_adda_tree_file(tree_root, tree_file_handle)
+						
 						
 						
 					rcm = np.zeros((n,n), dtype=np.int)
@@ -274,9 +276,9 @@ def compute_rcm_and_module_tree(blast_path,tree_path,tree_diagram_path, protLenD
 				
 				# os.fsync()
 	tree_root = split_rcm(rcm)
-	writeDia=writeDia+('%s\n\n' % tree_root)
+	#writeDia=writeDia+('%s\n\n' % tree_root)
 	writeTre=writeTre+adda_tree_string(currentGi, tree_root)
-	tree_diagram_file_handle.write(writeDia)
+	#tree_diagram_file_handle.write(writeDia)
 	tree_diagram_file_handle.flush()
 	tree_file_handle.write(writeTre)
 	tree_file_handle.flush()
