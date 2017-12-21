@@ -1,0 +1,1 @@
+OtherSoftware/adda-0.1.0/src/adda -K 73.70676 -C 8.33957 -E 0.05273 -M 1.417 -N 0.008 -i 100 -n Generated/1_ADDAProcessedInput/00036_Neur_chan_memb_adda.csv -f Generated/3_ADDA_IndexFiles/00036_Neur_chan_memb_index.in -t Generated/2_DomainTrees/00036_Neur_chan_memb.tree -q Generated/1_NidLists/00036_Neur_chan_memb_nid.txt 

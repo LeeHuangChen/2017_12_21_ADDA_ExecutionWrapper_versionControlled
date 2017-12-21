@@ -1,0 +1,128 @@
+# Copyright (C) 2000 Andreas Heger <heger@ebi.ac.uk>
+#  
+# This file is free software; as a special exception the author gives
+# unlimited permission to copy and/or distribute it, with or without 
+# modifications, as long as this notice is preserved.
+# 
+# This program is distributed in the hope that it will be useful, but
+# WITHOUT ANY WARRANTY, to the extent permitted by law; without even the
+# implied warranty of MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.
+
+AC_INIT(reconf)
+
+# get host information
+AC_CANONICAL_HOST
+AC_CANONICAL_SYSTEM
+
+SYSTEM_TYPE="$host_vendor-$host_os"
+MACHINE_TYPE="$host_cpu"
+AC_SUBST(SYSTEM_TYPE) 
+AC_SUBST(MACHINE_TYPE) 
+
+#
+# Making releases:
+#   ADDA_MICRO_VERSION += 1;
+#   ADDA_INTERFACE_AGE += 1;
+#   ADDA_BINARY_AGE += 1;
+# if any functions have been added, set ADDA_INTERFACE_AGE to 0.
+# if backwards compatibility has been broken,
+# set ADDA_BINARY_AGE _and_ ADDA_INTERFACE_AGE to 0.
+#
+ 
+ADDA_MAJOR_VERSION=0
+ADDA_MINOR_VERSION=1
+ADDA_MICRO_VERSION=0
+ADDA_INTERFACE_AGE=0
+ADDA_BINARY_AGE=0            
+
+ADDA_VERSION=$ADDA_MAJOR_VERSION.$ADDA_MINOR_VERSION.$ADDA_MICRO_VERSION 
+
+VERSION=$ADDA_VERSION
+ 
+AC_SUBST(ADDA_MAJOR_VERSION)
+AC_SUBST(ADDA_MINOR_VERSION)
+AC_SUBST(ADDA_MICRO_VERSION)
+AC_SUBST(ADDA_INTERFACE_AGE)
+AC_SUBST(ADDA_BINARY_AGE)
+AC_SUBST(ADDA_VERSION) 
+
+AM_CONFIG_HEADER(config.h)
+AM_INIT_AUTOMAKE([adda],$VERSION)
+
+# check for tools
+AC_PROG_CC
+AC_PROG_CXX
+AC_PROG_CPP  
+
+AC_CONFIG_AUX_DIR(.)  # use the 'install-sh', `config.sub', `config.guess' I provide
+AC_PROG_RANLIB
+
+for top_builddir in . .. ../.. $ac_auxdir $ac_auxdir/..; do
+             test -f $top_builddir/configure && break
+done  
+AM_PROG_LIBTOOL  
+
+# compile with warnings. not all compilers understand the same flags. For Irix CC for
+# example do not use -Wall
+case $SYSTEM_TYPE in
+    *pc-linux-gnu*)
+        if test "$ac_cv_prog_gcc" = "yes"
+            then
+              CXXFLAGS="$CXXFLAGS -Wall -pedantic"
+         fi
+         ;;
+    *sgi-irix6.5*)
+         if test "$ac_cv_prog_gcc" = "yes"
+            then
+              CXXFLAGS="$CXXFLAGS -Wall -pedantic "
+         else
+              CXXFLAGS="$CXXFLAGS -pedantic -LANG:std"
+         fi
+         ;;
+esac
+	
+AC_SUBST(CXXFLAGS)
+
+adl_ENABLE_LFS()
+
+AC_OUTPUT(Makefile m4/Makefile src/Makefile )
+
+dnl bindir and libdir twice for evaluation
+eval bindir="$bindir"
+eval bindir="$bindir"
+eval libdir="$libdir"
+eval libdir="$libdir"
+eval datadir="$datadir"
+eval mandir="$mandir"
+eval infodir="$infodir"
+
+echo "
+$PACKAGE configuration
+--------------------
+version			 : $VERSION
+host                     : $host
+ 
+binary install path      : $bindir
+library install path	 : $libdir
+data install path	 : $datadir
+manual page install path : $mandir
+info manual install path : $infodir
+ 
+compiler                 : $CC
+general options
+  CFLAGS                 : $CFLAGS $MORE_WARNINGS_CFLAGS
+  CPPFLAGS               : $CPPFLAGS $MORE_WARNINGS_CFLAGS
+  CXXFLAGS               : $CXXFLAGS $MORE_WARNINGS_CFLAGS
+  LIBS                   : $LDFLAGS $LIBS
+ 
+"
+
+
+
+
+
+
+
+
+
+

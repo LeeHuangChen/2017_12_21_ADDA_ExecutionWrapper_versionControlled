@@ -1,0 +1,11 @@
+
+
+Building a new DB, current time: 12/21/2017 14:52:13
+New DB name:   /media/lee/Seagate Backup Plus Drive/MobileDrive/Research_LuayLab/Programs/2017_11_06_ADDA_ExecutionSuite/V3/Generated/0_BlastDB/00036_Neur_chan_memb.fasta
+New DB title:  Sequences/00036_Neur_chan_memb.fasta
+Sequence type: Protein
+Keep Linkouts: T
+Keep MBits: T
+Maximum file size: 1000000000B
+Adding sequences from FASTA; added 36 sequences in 0.00139999 seconds.
+
