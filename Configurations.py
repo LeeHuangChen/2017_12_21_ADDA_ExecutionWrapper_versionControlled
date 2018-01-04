@@ -36,8 +36,7 @@ seqExt=".fasta"
 
 blastdbFolder="Generated/0_BlastDB"
 
-protLenFolder="Generated/0_ProteinLengths"
-protLenExt="_protLen.cPickle"
+
 
 alltoallFolder="Generated/0_BlastAllToAll"
 alltoallExt="_alltoall.txt"
@@ -50,11 +49,15 @@ blastdbLogFolder="Generated/Logs/0_MakeBlastDB"
 # 1. Convert to ADDA #
 ######################
 
+protLenFolder="InputFiles/ProteinLengths"
+protLenExt="_protLen.cPickle"
+
 #Convert to ADDA configurations
-blastAlltoAllInput="Generated/0_BlastAllToAll"
+blastAlltoAllInput="InputFiles/BlastAllToAllInput"
+alltoallExt="_alltoall.txt"
 
 addaProcessedInput="Generated/1_ADDAProcessedInput/"
-addaAppend="_adda.csv"
+addaAppend="_adda.tsv"
 
 proteinToNidTables="Generated/1_ProteinToNidTables/"
 tableAppend="_proteinTable.txt"

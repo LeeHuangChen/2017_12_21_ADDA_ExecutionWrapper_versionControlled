@@ -68,9 +68,9 @@ def runADDA(processedDir, treeDir, nidDir):
 		# print "nidList", os.path.isfile(nidList)
 		# #print "", os.path.isfile()
 		cmd=[exeDir,"-K",str(K), "-C",str(C),"-E",str(E),"-M",str(M),"-N",str(N),"-i",str(ii), "-n", links, "-f", linksIndex, "-t", domain_trees, "-q", nidList]
-		with open("commands.txt","a") as f:
-			f.write(util.cmdToString(cmd))
-			f.write("\n")
+		# with open("commands.txt","a") as f:
+		# 	f.write(util.cmdToString(cmd))
+		# 	f.write("\n")
 
 	proc=subprocess.Popen(cmd, stdout=subprocess.PIPE, stderr=subprocess.PIPE)
 
@@ -86,8 +86,8 @@ def runADDA(processedDir, treeDir, nidDir):
 		f.write(data.split("# final partitions\n")[-1])
 
 
-def main(recompile=True):
-	util.openfiles(["commands.txt"])
+def main(inputfile):
+	#util.openfiles(["commands.txt"])
 	#import configurations
 	processedFolder=conf.addaProcessedInput
 	processedAppend=conf.addaAppend
@@ -98,27 +98,29 @@ def main(recompile=True):
 	nidListFolder=conf.nidListDir
 	nidAppend=conf.nidAppend
 
-	processedFiles=os.listdir(processedFolder)
+	#processedFiles=os.listdir(processedFolder)
 
-	if recompile:
-		print "make clean and making ADDA"
-		#make clean the software
-		cmd=["make", "clean", "-C",conf.addaFolder]
-		proc=subprocess.Popen(cmd, stdout=subprocess.PIPE, stderr=subprocess.PIPE)
-		proc.communicate()
+	# if recompile:
+	# 	print "make clean and making ADDA"
+	# 	#make clean the software
+	# 	cmd=["make", "clean", "-C",conf.addaFolder]
+	# 	proc=subprocess.Popen(cmd, stdout=subprocess.PIPE, stderr=subprocess.PIPE)
+	# 	proc.communicate()
 
-		#make the software
-		cmd=["make","-C",conf.addaFolder]
-		proc=subprocess.Popen(cmd, stdout=subprocess.PIPE, stderr=subprocess.PIPE)
-		proc.communicate()
+	# 	#make the software
+	# 	cmd=["make","-C",conf.addaFolder]
+	# 	proc=subprocess.Popen(cmd, stdout=subprocess.PIPE, stderr=subprocess.PIPE)
+	# 	proc.communicate()
 
-	for i, processedFile in enumerate(processedFiles):
-		util.percent(i,len(processedFiles),len(processedFiles))
-		processedDir=os.path.join(processedFolder,processedFile)
-		treeDir=os.path.join(treeFolder,processedFile.replace(processedAppend,treeAppend))
-		nidDir=os.path.join(nidListFolder,processedFile.replace(processedAppend,nidAppend))
-		runADDA(processedDir,treeDir,nidDir)
-	print "ADDA Runs Completed."
+	#for i, processedFile in enumerate(processedFiles):
+	#util.percent(i,len(processedFiles),len(processedFiles))
+
+	processedDir=os.path.join(processedFolder,inputfile.replace(conf.alltoallExt,processedAppend))
+	treeDir=os.path.join(treeFolder,inputfile.replace(conf.alltoallExt,treeAppend))
+	nidDir=os.path.join(nidListFolder,inputfile.replace(conf.alltoallExt,nidAppend))
+	runADDA(processedDir,treeDir,nidDir)
+
+	#print "ADDA Runs Completed."
 
 if __name__=="__main__":
 	main(recompile=True)

@@ -284,7 +284,7 @@ def compute_rcm_and_module_tree(blast_path,tree_path,tree_diagram_path, protLenD
 	tree_file_handle.flush()
 
 
-def main():
+def main(inputfile):
 	addaProcessedInput=conf.addaProcessedInput
 	treeDiagFolder=conf.treeDiagFolder
 	treeFolder=conf.treeFolder
@@ -293,25 +293,27 @@ def main():
 
 	util.generateDirectoriesMult([treeDiagFolder,treeFolder])
 
-	inputfiles=os.listdir(addaProcessedInput)
-	for i, inputfile in enumerate(inputfiles):
 
 
-		#import protein length dictionary
-		dictPath=os.path.join(conf.protLenFolder,inputfile.replace(conf.addaAppend, conf.protLenExt))
-		#print dictPath
-		protLenDict=load(open(dictPath,"rb"))
+	# inputfiles=os.listdir(addaProcessedInput)
+	# for i, inputfile in enumerate(inputfiles):
 
-		dictPath2=os.path.join(conf.NidToProteinTables,inputfile.replace(conf.addaAppend, conf.NidToProteinAppend))
-		protNidDict=load(open(dictPath2,"rb"))
 
-		#determine the file paths
-		blast_path= os.path.join(addaProcessedInput,inputfile)
-		tree_path = os.path.join(conf.treeFolder,inputfile.replace(conf.addaAppend,conf.treeAppend))
-		tree_diagram_path = os.path.join(conf.treeDiagFolder,inputfile.replace(conf.addaAppend,conf.treeDiagAppend))
+	#import protein length dictionary
+	dictPath=os.path.join(conf.protLenFolder,inputfile.replace(conf.alltoallExt, conf.protLenExt))
+	#print dictPath
+	protLenDict=load(open(dictPath,"rb"))
 
-		header=str(i)+"/"+str(len(inputfiles))+"\n"
-		compute_rcm_and_module_tree(blast_path,tree_path,tree_diagram_path, protLenDict, protNidDict, progressHeader=header, progressFooter="\n")
+	dictPath2=os.path.join(conf.NidToProteinTables,inputfile.replace(conf.alltoallExt, conf.NidToProteinAppend))
+	protNidDict=load(open(dictPath2,"rb"))
+
+	#determine the file paths
+	blast_path= os.path.join(conf.addaProcessedInput,inputfile.replace(conf.alltoallExt,conf.addaAppend))
+	tree_path = os.path.join(conf.treeFolder,inputfile.replace(conf.alltoallExt,conf.treeAppend))
+	tree_diagram_path = os.path.join(conf.treeDiagFolder,inputfile.replace(conf.alltoallExt,conf.treeDiagAppend))
+
+	#header=str(i)+"/"+str(len(inputfiles))+"\n"
+	compute_rcm_and_module_tree(blast_path,tree_path,tree_diagram_path, protLenDict, protNidDict)
 		
 if __name__ == '__main__':
 	# make_pbs_runs()
