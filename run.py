@@ -6,6 +6,7 @@ import Configurations as conf
 import os
 import subprocess
 from subprocess import call
+import time
 
 
 def main():
@@ -36,12 +37,21 @@ def main():
 	inputfilenames.sort()
 
 	for inputfilename in inputfilenames:
+		print "\nProcessing",inputfilename
 		print "\n1_ConvertToADDA: "
 		ConvertToADDA.main(inputfilename)
+
+		#start timer
+		startTime=time.time()
 		print "\n2_rcm_module_tree:"
 		rcm_module_tree.main(inputfilename)
 		print "\n3_RunADDA:"
 		RunADDA.main(inputfilename)
+
+		#end timer
+		endTime=time.time()
+		timeDiff=endTime- startTime
+		print "rcm and adda completed in",timeDiff,"seconds"
 
 
 

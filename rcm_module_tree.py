@@ -203,13 +203,14 @@ def compute_rcm_and_module_tree(blast_path,tree_path,tree_diagram_path, protLenD
 	numlines=len(lines)
 	currentGi=0
 	rcm=""
+	rcmNotNull=False
 	#these varaiables will contain the output temporarily for speeding up the runtime
 	#writeDia=""
 	writeTre=""
 	hspsCount=0
 	for i, line in enumerate(lines):
 		if printProgress:
-			util.percent(i,numlines,500,header=progressHeader,footer=progressFooter)
+			util.percent(i,numlines,50,header=progressHeader,footer=progressFooter)
 		if len(line)>0:
 			#query_length=500
 			(query_gi, hsps) = parse_blast(line)
@@ -233,7 +234,8 @@ def compute_rcm_and_module_tree(blast_path,tree_path,tree_diagram_path, protLenD
 						# 	f.write(outstring+"\n\n\n")
 
 
-					if(rcm!=""):
+					#if(rcm!=""):
+					if rcmNotNull:
 						#print rcm
 						#np.savetxt(os.path.join("rcmTest", str(currentGi)+'.csv'), rcm, delimiter=',', fmt='%d')
 						
@@ -259,6 +261,7 @@ def compute_rcm_and_module_tree(blast_path,tree_path,tree_diagram_path, protLenD
 						
 						
 					rcm = np.zeros((n,n), dtype=np.int)
+					rcmNotNull=True
 					cnt += 1
 					currentGi=query_gi
 				sum_l = 0

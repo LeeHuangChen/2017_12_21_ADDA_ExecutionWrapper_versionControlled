@@ -1,5 +1,6 @@
 import os
 import stat
+import sys
 
 #generate all the directories needed for the given path (helper function)
 def generateDirectories(path):
@@ -15,12 +16,22 @@ def generateDirectories(path):
 			os.mkdir(curdir)
 			
 def percent(i,length,numberNotification, header="", footer="",percentRange=(0,100)):
+	# scale=length/numberNotification
+	# if scale>0:
+	# 	if(i%scale==0):
+	# 		progress=str(percentRange[0]+int(float(i)/float(length)*(percentRange[1]-percentRange[0])*100)/float(100))+"%"
+	# 		write=header+progress+footer
+	# 		print write
+	progressbar(i,length,numberNotification)
+
+def progressbar(i,length,numberNotification):
 	scale=length/numberNotification
 	if scale>0:
 		if(i%scale==0):
-			progress=str(percentRange[0]+int(float(i)/float(length)*(percentRange[1]-percentRange[0])*100)/float(100))+"%"
-			write=header+progress+footer
-			print write
+			sys.stdout.write('*')
+			sys.stdout.flush()
+			
+
 def openfiles(filenames):
 	for filename in filenames:
 		f=open(filename,"w")
