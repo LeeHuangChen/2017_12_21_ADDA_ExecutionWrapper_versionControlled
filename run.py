@@ -51,7 +51,7 @@ def main():
         # start timer
         startTime = time.time()
         util.printL("2_rcm_module_tree:\n")
-        rcm_module_tree.main(inputfilename.replace(conf.seqExt, conf.addaAppend))
+        rcm_module_tree.main(inputfilename.replace(conf.seqExt, conf.alltoallExt))
         util.printL("3_RunADDA:\n")
         RunADDA.main(inputfilename)
 
