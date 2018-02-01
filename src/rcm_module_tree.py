@@ -303,7 +303,7 @@ def main(inputfile):
     # for i, inputfile in enumerate(inputfiles):
 
     # import protein length dictionary
-    dictPath = os.path.join(conf.protLenFolder, inputfile)
+    dictPath = os.path.join(conf.protLenFolder, inputfile.replace(conf.seqExt, conf.protLenExt))
     # print dictPath
     protLenDict = load(open(dictPath, "rb"))
 
