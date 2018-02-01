@@ -42,8 +42,8 @@ def main():
     for i, inputfilename in enumerate(inputfilenames):
         util.printL("\nProcessing "+inputfilename+" ("+str(i)+"/"+str(len(inputfilenames))+")\n")
 
-        util.printL("0_BlastAllToAll:\n")
-        BlastAllToAll.main(inputfilename)
+        # util.printL("0_BlastAllToAll:\n")
+        # BlastAllToAll.main(inputfilename)
 
         util.printL("1_ConvertToADDA:\n")
         ConvertToADDA.main(inputfilename)
