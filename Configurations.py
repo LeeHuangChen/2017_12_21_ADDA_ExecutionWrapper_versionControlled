@@ -22,7 +22,7 @@ d = 1
 v = 1
 
 # recompile ADDA before executing it
-recompileADDA = True
+recompileADDA = False
 
 ####################
 #  CONFIGURATIONS  #
