@@ -49,7 +49,7 @@ def main(inputFilename, printProgress=True):
 
     # read the inputfile
     read = ""
-    with open(os.path.join(inputFolder, inputFilename), 'r') as f:
+    with open(os.path.join(inputFolder, inputFilename.replace(conf.seqExt, conf.alltoallExt)), 'r') as f:
         read = f.read()
     lines = read.split("\n")
     numLines = len(lines)
