@@ -45,8 +45,8 @@ def main():
         # util.printL("0_BlastAllToAll:\n")
         # BlastAllToAll.main(inputfilename)
 
-        util.printL("1_ConvertToADDA:\n")
-        ConvertToADDA.main(inputfilename)
+        # util.printL("1_ConvertToADDA:\n")
+        # ConvertToADDA.main(inputfilename)
 
         # start timer
         startTime = time.time()
