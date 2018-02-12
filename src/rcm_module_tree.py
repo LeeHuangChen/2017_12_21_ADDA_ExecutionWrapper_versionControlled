@@ -190,7 +190,7 @@ def adda_tree_string(qi, treeroot):
 def compute_rcm_and_module_tree(blast_path, tree_path, tree_diagram_path, protLenDict, protNidDict, printProgress=True,
                                 progressHeader="", progressFooter=""):
     util.openfiles([tree_path, tree_diagram_path])
-    print blast_path
+    #print blast_path
 
     if os.path.exists(tree_path):
         processed = set()

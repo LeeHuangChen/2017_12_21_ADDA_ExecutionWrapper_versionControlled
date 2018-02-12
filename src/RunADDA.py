@@ -112,9 +112,9 @@ def main(inputfile):
     # for i, processedFile in enumerate(processedFiles):
     # util.percent(i,len(processedFiles),len(processedFiles))
 
-    processedDir = os.path.join(processedFolder, inputfile.replace(conf.seqExt, processedAppend))
-    treeDir = os.path.join(treeFolder, inputfile.replace(conf.seqExt, treeAppend))
-    nidDir = os.path.join(nidListFolder, inputfile.replace(conf.seqExt, nidAppend))
+    processedDir = os.path.join(processedFolder, inputfile)
+    treeDir = os.path.join(treeFolder, inputfile)
+    nidDir = os.path.join(nidListFolder, inputfile)
     runADDA(processedDir, treeDir, nidDir)
 
 

@@ -42,15 +42,15 @@ def main():
     for i, inputfilename in enumerate(inputfilenames):
         util.printL("\nProcessing "+inputfilename+" ("+str(i)+"/"+str(len(inputfilenames))+")\n")
 
-        # util.printL("0_BlastAllToAll:\n")
-        # BlastAllToAll.main(inputfilename)
+        util.printL("0_BlastAllToAll:\n")
+        BlastAllToAll.main(inputfilename)
 
-        # util.printL("1_ConvertToADDA:\n")
-        # ConvertToADDA.main(inputfilename)
+        util.printL("1_ConvertToADDA:\n")
+        ConvertToADDA.main(inputfilename)
 
         # start timer
         startTime = time.time()
-        util.printL("2_rcm_module_tree:\n")
+        util.printL("\n2_rcm_module_tree:\n")
         rcm_module_tree.main(inputfilename)
         util.printL("3_RunADDA:\n")
         RunADDA.main(inputfilename)
